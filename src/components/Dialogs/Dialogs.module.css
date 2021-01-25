@@ -1,6 +1,5 @@
 .dialogs {
   display: grid;
-
   grid-template-columns: 2fr 10fr;
 }
 
@@ -8,18 +7,6 @@
   padding: 10px;
 }
 
-.dialog {
-
-}
-
-.dialog.active {
-  color:brown;
-}
-
 .messages {
   padding: 10px;
-}
-
-.message {
-
 }
