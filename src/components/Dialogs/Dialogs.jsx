@@ -5,7 +5,6 @@ import classes from './Dialogs.module.css';
 
 const Dialogs = (props) => {
   const { dialogs, messages } = props.dialogsPage;
- // const { users } = props.users;
 
   return (
     <div>
