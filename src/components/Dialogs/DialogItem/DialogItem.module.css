@@ -2,6 +2,10 @@
 
 }
 
+.dialog img {
+  width: 50px;
+}
+
 .dialog.active {
   color:brown;
 }

@@ -1,3 +1,8 @@
 .message {
+  color: white;
+}
 
+.other {
+  text-align: right;
+  color: black;
 }
