@@ -6,6 +6,13 @@ import classes from './Dialogs.module.css';
 const Dialogs = (props) => {
   const { dialogs, messages } = props.dialogsPage;
 
+  const newMessageElement = React.createRef();
+
+  const addMessage = () => {
+    const text = newMessageElement.current.value;
+    alert(text);
+  };
+
   return (
     <div>
       <div className={classes.dialogs}>
@@ -19,6 +26,14 @@ const Dialogs = (props) => {
             <Message messages={messages} />
           ))}
         </div>
+        <div>
+        <div>
+          <textarea ref={newMessageElement}></textarea>
+        </div>
+        <div>
+          <button onClick={addMessage}>Add message</button>
+        </div>
+      </div>
       </div>
     </div>
   );
