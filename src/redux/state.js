@@ -27,4 +27,14 @@ const state = {
   friends: [5, 12],
 };
 
+export const addPost = (text) => {
+  const newPost = {
+    id: 3, 
+    text,
+    likesCount: 0,
+  };
+
+  state.profilePage.posts.push(newPost);
+}
+
 export default state;

@@ -4,10 +4,11 @@ import classes from './MyPosts.module.css';
 
 const MyPosts = (props) => {
   const newPostElement = React.createRef();
+  const { addPost } = props;
 
-  const addPost = () => {
+  const handleClick = () => {
     const text = newPostElement.current.value;
-    alert(text);
+    addPost(text);
   };
 
   return (
@@ -18,7 +19,7 @@ const MyPosts = (props) => {
           <textarea ref={newPostElement}></textarea>
         </div>
         <div>
-          <button onClick={addPost}>Add post</button>
+          <button onClick={handleClick}>Add post</button>
         </div>
       </div>
       <div className={classes.posts}>
