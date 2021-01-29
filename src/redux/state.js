@@ -1,3 +1,5 @@
+import { rerenderTree } from './../render';
+
 const state = {
   users: {
     1: { id: 1, name: 'Piter', avatar: 'https://www.popsci.com/resizer/oBw2zifFCqH3deU6vy2bPRSG99Q=/760x456/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/WMD5M52LJFBEBIHNEEABHVB6LA.jpg' },
@@ -23,18 +25,30 @@ const state = {
       { id: 1, text: 'Hi, How are you?', likesCount: 0 },
       { id: 2, text: 'It is my first post', likesCount: 25 },
     ],
+    newPost: {
+      text: '',
+    }
   },
   friends: [5, 12],
 };
 
-export const addPost = (text) => {
+export const profileChangeText = (text) => {
+  state.profilePage.newPost.text = text;
+  rerenderTree(state);
+};
+
+export const addPost = () => {
+  const { text } = state.profilePage.newPost;
+
   const newPost = {
-    id: 3, 
+    id: 3,
     text,
     likesCount: 0,
   };
 
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPost.text = '';
+  rerenderTree(state);
 }
 
 export default state;

@@ -4,11 +4,16 @@ import classes from './MyPosts.module.css';
 
 const MyPosts = (props) => {
   const newPostElement = React.createRef();
-  const { addPost } = props;
+  const { addPost, profileChangeText, newPost } = props;
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const text = newPostElement.current.value;
+    profileChangeText(text);
+  }
 
   const handleClick = () => {
-    const text = newPostElement.current.value;
-    addPost(text);
+    addPost();
   };
 
   return (
@@ -16,7 +21,7 @@ const MyPosts = (props) => {
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea ref={newPostElement} onChange={handleChange} value={newPost.text}></textarea>
         </div>
         <div>
           <button onClick={handleClick}>Add post</button>
