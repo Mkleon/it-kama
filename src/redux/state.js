@@ -19,6 +19,7 @@ const state = {
       { dialogId: 1, id: 2, text: 'Hi, Piter!', createdBy: 2 },
       { dialogId: 1, id: 3, text: 'How are you?', createdBy: 1 },
     ],
+    newMessageText: '',
   },
   profilePage: {
     posts:[
@@ -50,5 +51,25 @@ export const addPost = () => {
   state.profilePage.newPost.text = '';
   rerenderTree(state);
 }
+
+export const addMessage = () => {
+  const text = state.dialogsPage.newMessageText;
+
+  const newMessage = {
+    dialogId: 1,
+    id: 1,
+    text,
+    createdBy: 1,
+  };
+
+  state.dialogsPage.messages.push(newMessage);
+  state.dialogsPage.newMessageText = '';
+  rerenderTree(state);
+};
+
+export const updateMessageText = (text) => {
+  state.dialogsPage.newMessageText = text;
+  rerenderTree(state);
+};
 
 export default state;

@@ -4,13 +4,20 @@ import Message from './Message/Message';
 import classes from './Dialogs.module.css';
 
 const Dialogs = (props) => {
-  const { dialogs, messages } = props.dialogsPage;
+  const { dialogs, messages, newMessageText } = props.dialogsPage;
+  const { addMessage, updateMessageText } = props;
 
   const newMessageElement = React.createRef();
 
-  const addMessage = () => {
+  const handleChange = (e) => {
+    e.preventDefault();
     const text = newMessageElement.current.value;
-    alert(text);
+    updateMessageText(text);
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    addMessage();
   };
 
   return (
@@ -28,10 +35,10 @@ const Dialogs = (props) => {
         </div>
         <div>
         <div>
-          <textarea ref={newMessageElement}></textarea>
+          <textarea ref={newMessageElement} onChange={handleChange} value={newMessageText} />
         </div>
         <div>
-          <button onClick={addMessage}>Add message</button>
+          <button onClick={handleClick}>Add message</button>
         </div>
       </div>
       </div>
