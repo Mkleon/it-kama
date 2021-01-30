@@ -1,3 +1,8 @@
+const POST_ADD = 'POST_ADD';
+const PROFILE_TEXT_UPDATE = 'PROFILE_TEXT_UPDATE';
+const MESSAGE_ADD = 'MESSAGE_ADD';
+const MESSAGE_TEXT_UPDATE = 'MESSAGE_TEXT_UPDATE';
+
 const store = {
   _subscribe: () => {},
   _state: {
@@ -42,7 +47,7 @@ const store = {
   },
 
   dispatch(action) {
-    if (action.type === 'POST_ADD') {
+    if (action.type === POST_ADD) {
       const { text } = this._state.profilePage.newPost;
       const newPost = {
         id: 3,
@@ -53,7 +58,7 @@ const store = {
       this._state.profilePage.posts.push(newPost);
       this._state.profilePage.newPost.text = '';
       this._subscribe(this._state);
-    } else if (action.type === 'MESSAGE_ADD') {      
+    } else if (action.type === MESSAGE_ADD) {      
       const text = this._state.dialogsPage.newMessageText;
       const newMessage = {
         dialogId: 1,
@@ -65,14 +70,32 @@ const store = {
       this._state.dialogsPage.messages.push(newMessage);
       this._state.dialogsPage.newMessageText = '';
       this._subscribe(this._state);
-    } else if (action.type === 'MESSAGE_TEXT_UPDATE') {
+    } else if (action.type === MESSAGE_TEXT_UPDATE) {
       this._state.dialogsPage.newMessageText = action.text;
       this._subscribe(this._state);
-    } else if (action.type === 'PROFILE_TEXT_UPDATE') {
+    } else if (action.type === PROFILE_TEXT_UPDATE) {
       this._state.profilePage.newPost.text = action.text;
       this._subscribe(this._state);
     }
   }
 };
+
+export const addPostActionCreator = () => ({
+  type: POST_ADD,
+});
+
+export const updateProfileTextActionCreator = (text) => ({
+  type: PROFILE_TEXT_UPDATE,
+  text,
+});
+
+export const addMessageActionCreator = () => ({
+  type: MESSAGE_ADD,
+});
+
+export const updateMessageTextActionCreator = (text) => ({
+  type: MESSAGE_TEXT_UPDATE,
+  text,
+});
 
 export default store;
