@@ -10,13 +10,7 @@ const rerenderTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App 
-          state={state}
-          addPost={store.addPost.bind(store)}
-          profileChangeText={store.profileChangeText.bind(store)}
-          addMessage={store.addMessage.bind(store)}
-          updateMessageText={store.updateMessageText.bind(store)}
-        />
+        <App state={state} dispatch={store.dispatch.bind(store)} />
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
@@ -24,7 +18,7 @@ const rerenderTree = (state) => {
 };
 
 rerenderTree(store.getState());
-store.subscribe(rerenderTree);
+store.subscriber(rerenderTree);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

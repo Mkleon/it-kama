@@ -37,48 +37,42 @@ const store = {
     return this._state;
   },
 
-  subscribe(observer) {
+  subscriber(observer) {
     this._subscribe = observer;
   },
 
-  profileChangeText(text) {
-    this._state.profilePage.newPost.text = text;
-    this._subscribe(this._state);
-  },
+  dispatch(action) {
+    if (action.type === 'POST_ADD') {
+      const { text } = this._state.profilePage.newPost;
+      const newPost = {
+        id: 3,
+        text,
+        likesCount: 0,
+      };
 
-  addPost() {
-    const { text } = this._state.profilePage.newPost;
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPost.text = '';
+      this._subscribe(this._state);
+    } else if (action.type === 'MESSAGE_ADD') {      
+      const text = this._state.dialogsPage.newMessageText;
+      const newMessage = {
+        dialogId: 1,
+        id: 1,
+        text,
+        createdBy: 1,
+      };
 
-    const newPost = {
-      id: 3,
-      text,
-      likesCount: 0,
-    };
-
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPost.text = '';
-    this._subscribe(this._state);
-  },
-
-  addMessage() {
-    const text = this._state.dialogsPage.newMessageText;
-
-    const newMessage = {
-      dialogId: 1,
-      id: 1,
-      text,
-      createdBy: 1,
-    };
-
-    this._state.dialogsPage.messages.push(newMessage);
-    this._state.dialogsPage.newMessageText = '';
-    this._subscribe(this._state);
-  },
-
-  updateMessageText(text) {
-    this._state.dialogsPage.newMessageText = text;
-    this._subscribe(this._state);
-  },
+      this._state.dialogsPage.messages.push(newMessage);
+      this._state.dialogsPage.newMessageText = '';
+      this._subscribe(this._state);
+    } else if (action.type === 'MESSAGE_TEXT_UPDATE') {
+      this._state.dialogsPage.newMessageText = action.text;
+      this._subscribe(this._state);
+    } else if (action.type === 'PROFILE_TEXT_UPDATE') {
+      this._state.profilePage.newPost.text = action.text;
+      this._subscribe(this._state);
+    }
+  }
 };
 
 export default store;

@@ -18,18 +18,13 @@ const App = (props) => {
       <Navbar friends={friends} users={users} />
       <div className='app-wrapper-content'>
         <Route path='/profile'>
-          <Profile 
-            profilePage={profilePage}
-            addPost={props.addPost}
-            profileChangeText={props.profileChangeText}
-          />
+          <Profile profilePage={profilePage} dispatch={props.dispatch} />
         </Route>
         <Route path='/dialogs'>
           <Dialogs
             dialogsPage={dialogsPage}
             users={users}
-            addMessage={props.addMessage}
-            updateMessageText={props.updateMessageText}
+            dispatch={props.dispatch}
           />
         </Route>
         <Route path='/news' component={News} />

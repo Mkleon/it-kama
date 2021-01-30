@@ -5,19 +5,19 @@ import classes from './Dialogs.module.css';
 
 const Dialogs = (props) => {
   const { dialogs, messages, newMessageText } = props.dialogsPage;
-  const { addMessage, updateMessageText } = props;
+  const { dispatch } = props;
 
   const newMessageElement = React.createRef();
 
   const handleChange = (e) => {
     e.preventDefault();
     const text = newMessageElement.current.value;
-    updateMessageText(text);
+    dispatch({ type: 'MESSAGE_TEXT_UPDATE', text });
   }
 
   const handleClick = (e) => {
     e.preventDefault();
-    addMessage();
+    dispatch({ type: 'MESSAGE_ADD' });
   };
 
   return (

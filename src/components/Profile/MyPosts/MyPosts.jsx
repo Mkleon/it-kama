@@ -4,16 +4,16 @@ import classes from './MyPosts.module.css';
 
 const MyPosts = (props) => {
   const newPostElement = React.createRef();
-  const { addPost, profileChangeText, newPost } = props;
+  const { dispatch, newPost } = props;
 
   const handleChange = (e) => {
     e.preventDefault();
     const text = newPostElement.current.value;
-    profileChangeText(text);
+    dispatch({ type: 'PROFILE_TEXT_UPDATE', text });
   }
 
   const handleClick = () => {
-    addPost();
+    dispatch({ type: 'POST_ADD' });
   };
 
   return (
