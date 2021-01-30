@@ -11,7 +11,7 @@ const rerenderTree = (state) => {
     <React.StrictMode>
       <BrowserRouter>
         <App 
-          state={store.getState()}
+          state={state}
           addPost={store.addPost.bind(store)}
           profileChangeText={store.profileChangeText.bind(store)}
           addMessage={store.addMessage.bind(store)}
@@ -23,7 +23,7 @@ const rerenderTree = (state) => {
   );
 };
 
-rerenderTree(store.state);
+rerenderTree(store.getState());
 store.subscribe(rerenderTree);
 
 // If you want to start measuring performance in your app, pass a function
