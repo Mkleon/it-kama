@@ -1,4 +1,4 @@
-import { rerenderTree } from './../render';
+let rerenderTree;
 
 const state = {
   users: {
@@ -70,6 +70,10 @@ export const addMessage = () => {
 export const updateMessageText = (text) => {
   state.dialogsPage.newMessageText = text;
   rerenderTree(state);
+};
+
+export const subscribe = (observer) => {
+  rerenderTree = observer;
 };
 
 export default state;
