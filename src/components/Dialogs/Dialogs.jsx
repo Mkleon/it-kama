@@ -2,21 +2,17 @@ import React from 'react';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import classes from './Dialogs.module.css';
-import { addMessageCreator, updateMessageTextCreator } from './../../redux/dialogsReducer';
 
 const Dialogs = (props) => {
-  const { dialogs, messages, newMessageText } = props.dialogsPage;
-  const { dispatch } = props;
+  const { updateMessageText, addMessage, dialogs, messages, newMessageText, users } = props;
 
   const handleChange = (e) => {
-    e.preventDefault();
     const text = e.target.value;
-    dispatch(updateMessageTextCreator(text));
+    updateMessageText(text);
   }
 
   const handleClick = (e) => {
-    e.preventDefault();
-    dispatch(addMessageCreator());
+    addMessage();
   };
 
   return (
@@ -24,7 +20,7 @@ const Dialogs = (props) => {
       <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
           {dialogs.map((dialog) => (
-            <DialogItem dialog={dialog} users={props.users} />
+            <DialogItem dialog={dialog} users={users} />
           ))}
         </div>
         <div className={classes.messages}>
