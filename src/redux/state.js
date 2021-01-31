@@ -80,20 +80,20 @@ const store = {
   }
 };
 
-export const addPostActionCreator = () => ({
+export const addPostCreator = () => ({
   type: POST_ADD,
 });
 
-export const updateProfileTextActionCreator = (text) => ({
+export const updateProfileTextCreator = (text) => ({
   type: PROFILE_TEXT_UPDATE,
   text,
 });
 
-export const addMessageActionCreator = () => ({
+export const addMessageCreator = () => ({
   type: MESSAGE_ADD,
 });
 
-export const updateMessageTextActionCreator = (text) => ({
+export const updateMessageTextCreator = (text) => ({
   type: MESSAGE_TEXT_UPDATE,
   text,
 });
