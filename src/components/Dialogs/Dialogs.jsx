@@ -20,12 +20,12 @@ const Dialogs = (props) => {
       <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
           {dialogs.map((dialog) => (
-            <DialogItem dialog={dialog} users={users} />
+            <DialogItem key={dialog.id} dialog={dialog} users={users} />
           ))}
         </div>
         <div className={classes.messages}>
           {messages.map((messages) => (
-            <Message messages={messages} />
+            <Message key={messages.id} messages={messages} />
           ))}
         </div>
         <div>

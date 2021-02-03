@@ -22,7 +22,7 @@ const usersReducer = (state = initialState, action) => {
       const text = state.newMessageText;
       const newMessage = {
         dialogId: 1,
-        id: 1,
+        id: 4,
         text,
         createdBy: 1,
       };
