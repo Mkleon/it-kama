@@ -4,7 +4,7 @@ import User from './User/User';
 const Users = (props) => {
     return (
         <div>
-            {props.users.map((user) => <User user={user} key={user.id} />)}
+           {props.users.allIds.map((id) => <User user={props.users.byId[id]} key={id} />)}
         </div>
     )
 };

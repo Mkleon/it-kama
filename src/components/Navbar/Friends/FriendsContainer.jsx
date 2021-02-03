@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
   return {
     friends: state.friends,
-    users: state.users,
+    users: state.users.byId,
   }
 };
 
