@@ -27,17 +27,17 @@ const usersReducer = (state = initialState, action) => {
         createdBy: 1,
       };
 
-      const newState = {...state};
-      newState.messages = [...state.messages];
-      newState.messages.push(newMessage);
-
-      newState.newMessageText = '';
-      return newState;
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+        newMessageText: '',
+      };
     }
     case MESSAGE_TEXT_UPDATE: {
-      const newState = {...state};
-      newState.newMessageText = action.text;
-      return newState;
+      return {
+        ...state,
+        newMessageText: action.text,
+      };
     }
     default: {
       return state;
