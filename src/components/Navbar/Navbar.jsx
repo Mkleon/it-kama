@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import FriendsContainer from './Friends/FriendsContainer';
+// import FriendsContainer from './Friends/FriendsContainer';
 import classes from './Navbar.module.css';
 
 const Navbar = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
           <NavLink to='/users' activeClassName={classes.activeLink}>Users</NavLink>
         </div>
       </nav>
-      <FriendsContainer />
+      { /*<FriendsContainer />*/ }
     </div>
   );
 };
