@@ -1,8 +1,9 @@
 import React from 'react';
 import classes from './User.module.css';
+import userMock from '../../../assets/images/user-mock.png';
 
 const User = (props) => {
-    const {  id, name, location: { country, city }, avatar, followed } = props.user;
+    const {  id, name, photos: { small }, followed } = props.user;
 
     const handleUnfollow = (e) => {
         e.preventDefault();
@@ -16,8 +17,8 @@ const User = (props) => {
 
     return (
         <div className={classes.user}>
-            <img alt='avatar' src={avatar} />
-            {`${name} || ${country} || ${city}  `}
+            <img alt='small' src={(small !== null) ? small : userMock } />
+            {`${name} `}
             {(followed)
                 ? <a href='/' onClick={handleUnfollow}>Unfollow</a>
                 : <a href='/' onClick={handleFollow}>Follow</a>
