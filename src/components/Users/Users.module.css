@@ -1,1 +1,4 @@
-
+.currentPage {
+  font-weight: bold;
+  color: #ccc;
+}
