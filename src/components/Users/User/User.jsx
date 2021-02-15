@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './User.module.css';
 import userMock from '../../../assets/images/user-mock.png';
+import { NavLink } from 'react-router-dom';
 
 const User = (props) => {
     const {  id, name, photos: { small }, followed } = props.user;
@@ -17,7 +18,9 @@ const User = (props) => {
 
     return (
         <div className={classes.user}>
-            <img alt='small' src={(small !== null) ? small : userMock } />
+            <NavLink to='/profile/'>
+                <img alt='small' src={(small !== null) ? small : userMock } />
+            </NavLink>
             {`${name} `}
             {(followed)
                 ? <a href='/' onClick={handleUnfollow}>Unfollow</a>
