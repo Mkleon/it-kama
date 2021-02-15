@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const SET_PAGE = 'SET_PAGE';
+const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
 
 const initialState = {
   byId: {},
@@ -10,6 +11,7 @@ const initialState = {
   totalCountPages: 0,
   countPerPage: 100,
   currentPage: 1,
+  isFetching: true,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -48,6 +50,12 @@ const usersReducer = (state = initialState, action) => {
         currentPage: action.page,
       };
     }
+    case TOGGLE_PRELOADER: {
+      return {
+        ...state,
+        isFetching: action.isFetching,
+      };
+    }
     default: {
       return state;
     }
@@ -59,5 +67,6 @@ export const unfollowCreator = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsersCreator = (users) => ({ type: SET_USERS, users });
 export const setTotalUsersCountCreator = (count) => ({ type: SET_TOTAL_USERS_COUNT, count });
 export const setPageCreator = (page) => ({ type: SET_PAGE, page });
+export const togglePreloaderCreator = (isFetching) => ({ type: TOGGLE_PRELOADER, isFetching });
 
 export default usersReducer;
