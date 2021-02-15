@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { followCreator, unfollowCreator, setUsersCreator, setTotalUsersCountCreator, setPageCreator, togglePreloaderCreator } from '../../redux/usersReducer';
+import { follow, unfollow, setUsers, setTotalUsersCount, setPage, togglePreloader } from '../../redux/usersReducer';
 import * as axios from 'axios';
 import Preloader from '../common/Preloader/Preloader';
 
@@ -54,16 +54,14 @@ const mapStateToProps = (state) => {
     }; 
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => dispatch(followCreator(userId)),
-        unfollow: (userId) => dispatch(unfollowCreator(userId)),
-        setUsers: (users) => dispatch(setUsersCreator(users)),
-        setTotalUsersCount: (totalCount) => dispatch(setTotalUsersCountCreator(totalCount)),
-        setPage: (page) => dispatch(setPageCreator(page)),
-        togglePreloader: (isFetching) => dispatch(togglePreloaderCreator(isFetching)),
-    };
-}
+const mapDispatchToProps = {
+    follow,
+    unfollow,
+    setUsers,
+    setTotalUsersCount,
+    setPage,
+    togglePreloader,
+};
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
 
