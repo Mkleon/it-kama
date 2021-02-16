@@ -18,7 +18,7 @@ const User = (props) => {
 
     return (
         <div className={classes.user}>
-            <NavLink to='/profile/'>
+            <NavLink to={'/profile/'+ id}>
                 <img alt='small' src={(small !== null) ? small : userMock } />
             </NavLink>
             {`${name} `}

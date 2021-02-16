@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
         <img className={classes.banner} alt='peru' src='https://im0-tub-ru.yandex.net/i?id=3ee12bfb49fb9fd3670cf996dac7e0ab&n=13' />
       </div>
       <div className={classes.dscriptionBlock}>
-        <img src={props.profile.photos.large} />
+        <img alt='large_photo' src={props.profile.photos.large} />
       </div>
     </div>
   );
