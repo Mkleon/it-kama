@@ -2,3 +2,7 @@
   grid-area: header;
   background-color: aquamarine;
 }
+
+.header .login {
+  float: right;
+}
