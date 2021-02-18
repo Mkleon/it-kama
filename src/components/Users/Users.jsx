@@ -15,7 +15,7 @@ const Users = (props) => {
             <div>
                 {pageNumbers.map((num) => <span className={(props.currentPage === num) ? classes.currentPage : ''} onClick={(e) => { props.changePage(num); }}>{num + '  '}</span>)}
             </div>
-            {props.users.allIds.map((id) => <User 
+            {props.users.allIds.map((id) => <User
                 user={props.users.byId[id]}
                 follow={props.follow}
                 unfollow={props.unfollow} key={id}

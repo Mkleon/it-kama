@@ -8,7 +8,10 @@ import Preloader from '../common/Preloader/Preloader';
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
         this.props.togglePreloader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countPerPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countPerPage}`,
+        {
+            withCredentials: true
+        })
             .then((response) => {
                 this.props.togglePreloader(false);
                 this.props.setUsers(response.data.items);
@@ -20,7 +23,10 @@ class UsersAPIComponent extends React.Component {
         this.props.setPage(page);
         this.props.togglePreloader(true);
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.countPerPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.countPerPage}`,
+        {
+            withCredentials: true
+        })
             .then((response) => {
                 this.props.togglePreloader(false);
                 this.props.setUsers(response.data.items);
