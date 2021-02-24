@@ -6,27 +6,31 @@ import { followApi } from '../../../api/api';
 
 const User = (props) => {
     const {  id, name, photos: { small }, followed } = props.user;
+    const { isFollowingProgress, toggleIsFollowingProgress } = props;
 
     const handleUnfollow = (userId) => (e) => {
         e.preventDefault();
+        toggleIsFollowingProgress(true, userId);
 
         followApi.setUnfollow(userId)
             .then((data) => {
                 if (data.resultCode === 0) {
                     props.unfollow(id);
                 }
+                toggleIsFollowingProgress(false, userId);
             });
     };
 
     const handleFollow = (userId) => (e) => {
         e.preventDefault();
-    
+        toggleIsFollowingProgress(true, userId);
+
         followApi.setFollow(userId)
             .then((data) => {
-                debugger
                 if (data.resultCode === 0) {
                     props.follow(id);
                 }
+                toggleIsFollowingProgress(false, userId);
             });
     };
 
@@ -37,8 +41,8 @@ const User = (props) => {
             </NavLink>
             {`${name} `}
             {(followed)
-                ? <a href='/' onClick={handleUnfollow(id)}>Unfollow</a>
-                : <a href='/' onClick={handleFollow(id)}>Follow</a>
+                ? <button disabled={isFollowingProgress.some((uid) => uid === id)} onClick={handleUnfollow(id)}>Unfollow</button>
+                : <button disabled={isFollowingProgress.some((uid) => uid === id)} onClick={handleFollow(id)}>Follow</button>
             }
         </div>
     )

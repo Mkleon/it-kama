@@ -18,7 +18,10 @@ const Users = (props) => {
             {props.users.allIds.map((id) => <User
                 user={props.users.byId[id]}
                 follow={props.follow}
-                unfollow={props.unfollow} key={id}
+                unfollow={props.unfollow}
+                key={id}
+                isFollowingProgress={props.isFollowingProgress}
+                toggleIsFollowingProgress={props.toggleIsFollowingProgress}
             />)}
         </div>
     )
