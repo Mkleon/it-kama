@@ -23,6 +23,7 @@ const User = (props) => {
     
         followApi.setFollow(userId)
             .then((data) => {
+                debugger
                 if (data.resultCode === 0) {
                     props.follow(id);
                 }
