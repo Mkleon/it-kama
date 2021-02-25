@@ -1,3 +1,5 @@
+import { followApi, usersApi } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -79,5 +81,45 @@ export const setTotalUsersCount = (count) => ({ type: SET_TOTAL_USERS_COUNT, cou
 export const setPage = (page) => ({ type: SET_PAGE, page });
 export const togglePreloader = (isFetching) => ({ type: TOGGLE_PRELOADER, isFetching });
 export const toggleIsFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
+
+export const followThC = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userId));
+
+    followApi.setFollow(userId)
+      .then((data) => {
+          if (data.resultCode === 0) {
+            dispatch(follow(userId));
+          }
+          dispatch(toggleIsFollowingProgress(false, userId));
+      });
+  };
+};
+
+export const unfollowThC = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userId));
+
+    followApi.setUnfollow(userId)
+      .then((data) => {
+          if (data.resultCode === 0) {
+            dispatch(unfollow(userId));
+          }
+          dispatch(toggleIsFollowingProgress(false, userId));
+      });
+  };
+};
+
+export const getUsersThC = (currentPage, countPerPage) => {
+  return (dispatch) => {
+    dispatch(togglePreloader(true));
+    usersApi.getUsers(currentPage, countPerPage)
+        .then((data) => {
+          dispatch(togglePreloader(false));
+          dispatch(setUsers(data.items));
+          dispatch(setTotalUsersCount(data.totalCount));
+        });
+  }
+};
 
 export default usersReducer;

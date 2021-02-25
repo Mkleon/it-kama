@@ -1,31 +1,17 @@
 import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
-import { follow, unfollow, setUsers, setTotalUsersCount, setPage, togglePreloader, toggleIsFollowingProgress } from '../../redux/usersReducer';
+import { followThC, unfollowThC, setTotalUsersCount, setPage, getUsersThC } from '../../redux/usersReducer';
 import Preloader from '../common/Preloader/Preloader';
-import { usersApi } from '../../api/api';
 
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
-        this.props.togglePreloader(true);
-        usersApi.getUsers(this.props.currentPage, this.props.countPerPage)
-            .then((data) => {
-                this.props.togglePreloader(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-            });
+        this.props.getUsersThC(this.props.currentPage, this.props.countPerPage);
     }
 
     changePage = (page) => {
         this.props.setPage(page);
-        this.props.togglePreloader(true);
-
-        usersApi.getUsers(this.props.currentPage, this.props.countPerPage)
-            .then((data) => {
-                this.props.togglePreloader(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-            });
+        this.props.getUsersThC(this.props.currentPage, this.props.countPerPage);
     }
 
     render() {
@@ -37,10 +23,9 @@ class UsersAPIComponent extends React.Component {
                 countPerPage={this.props.countPerPage}
                 currentPage={this.props.currentPage}
                 users={this.props.users}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
+                followThC={this.props.followThC}
+                unfollowThC={this.props.unfollowThC}
                 isFollowingProgress={this.props.isFollowingProgress}
-                toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
             />
         </>);
     }
@@ -58,13 +43,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    follow,
-    unfollow,
-    setUsers,
+    followThC,
+    unfollowThC,
+    getUsersThC,
     setTotalUsersCount,
     setPage,
-    togglePreloader,
-    toggleIsFollowingProgress,
 };
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);

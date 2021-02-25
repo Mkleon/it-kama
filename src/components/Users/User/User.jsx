@@ -2,36 +2,19 @@ import React from 'react';
 import classes from './User.module.css';
 import userMock from '../../../assets/images/user-mock.png';
 import { NavLink } from 'react-router-dom';
-import { followApi } from '../../../api/api';
 
 const User = (props) => {
     const {  id, name, photos: { small }, followed } = props.user;
-    const { isFollowingProgress, toggleIsFollowingProgress } = props;
+    const { isFollowingProgress, followThC, unfollowThC } = props;
 
     const handleUnfollow = (userId) => (e) => {
         e.preventDefault();
-        toggleIsFollowingProgress(true, userId);
-
-        followApi.setUnfollow(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    props.unfollow(id);
-                }
-                toggleIsFollowingProgress(false, userId);
-            });
+        unfollowThC(userId);
     };
 
     const handleFollow = (userId) => (e) => {
         e.preventDefault();
-        toggleIsFollowingProgress(true, userId);
-
-        followApi.setFollow(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    props.follow(id);
-                }
-                toggleIsFollowingProgress(false, userId);
-            });
+        followThC(userId);
     };
 
     return (
