@@ -66,20 +66,22 @@ export const getUserProfileThC = (userId) => {
   };
 };
 
-export const getUserStatus = (userId) => {
+export const getUserStatusThC = (userId) => {
   return (dispatch) => {
     profileApi.getStatus(userId)
-      .then((data) => {
-        dispatch(setStatus(data));
+      .then((response) => {
+        dispatch(setStatus(response.data));
       })
   };
 };
 
-export const updateUserStatus = (status) => {
+export const updateUserStatusThC = (status) => {
   return (dispatch) => {
     profileApi.setStatus(status)
-      .then((data) => {
-        dispatch(setStatus(data));
+      .then((response) => {
+        if (response.data.resultCode === 0) {
+          dispatch(setStatus(status));
+        }
       })
   };
 }
