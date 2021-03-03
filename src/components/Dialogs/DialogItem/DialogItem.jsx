@@ -4,7 +4,7 @@ import classes from './DialogItem.module.css';
 
 const DialogItem = (props) => {
   const { id, userId } = props.dialog;
-  const { name, avatar } = props.users.byId[userId];
+  const { name, avatar } = props.users.byId[userId]; // users нет в этот момент
   const path = `/dialogs/${id}`;
 
   return (

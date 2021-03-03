@@ -19,9 +19,9 @@ const Dialogs = (props) => {
     <div>
       <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
-          {dialogs.map((dialog) => (
-            <DialogItem key={dialog.id} dialog={dialog} users={users} />
-          ))}
+          {dialogs.map((dialog) => {
+            return <DialogItem key={dialog.id} dialog={dialog} users={users} />
+          })}
         </div>
         <div className={classes.messages}>
           {messages.map((messages) => (

@@ -1,6 +1,18 @@
+import React from 'react';
 import Dialogs from './Dialogs';
 import { addMessageCreator, updateMessageTextCreator } from '../../redux/dialogsReducer';
+import { getUsersThC } from '../../redux/usersReducer';
 import { connect } from 'react-redux';
+
+class DialogsContainer extends React.Component {
+  componentDidMount() {
+    this.props.getUsersThC(this.props.currentPage, this.props.countPerPage);
+  }
+
+  render() {
+    return <Dialogs {...this.props} />
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -8,16 +20,15 @@ const mapStateToProps = (state) => {
     messages: state.dialogsPage.messages,
     newMessageText: state.dialogsPage.newMessageText,
     users: state.users,
+    countPerPage:  state.users.countPerPage,
+    currentPage: state.users.currentPage,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateMessageText: (text) => dispatch(updateMessageTextCreator(text)),  
-    addMessage: () => dispatch(addMessageCreator()),
-  };
+const mapDispatchToProps = {
+  updateMessageTextCreator,  
+  addMessageCreator,
+  getUsersThC
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-export default DialogsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(DialogsContainer);
