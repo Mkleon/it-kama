@@ -2,9 +2,25 @@ import React from 'react';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import classes from './Dialogs.module.css';
+import { Field, reduxForm } from 'redux-form';
+
+const DialogMessage = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field type='text' component='textarea' />
+      </div>
+      <div>
+        <button>Add message</button>
+      </div>
+    </form>
+  )
+};
+
+const DialogMessageReduxForm = reduxForm({ form: 'dialodMessage' })(DialogMessage);
 
 const Dialogs = (props) => {
-  const { updateMessageText, addMessage, dialogs, messages, newMessageText, users } = props;
+  const { updateMessageText, addMessage, dialogs, messages, newMessageText } = props;
 
   const handleChange = (e) => {
     const text = e.target.value;
@@ -20,7 +36,7 @@ const Dialogs = (props) => {
       <div className={classes.dialogs}>
         <div className={classes.dialogsItems}>
           {dialogs.map((dialog) => {
-            return <DialogItem key={dialog.id} dialog={dialog} users={users} />
+            return <DialogItem key={dialog.id} dialog={dialog} />
           })}
         </div>
         <div className={classes.messages}>
@@ -29,12 +45,7 @@ const Dialogs = (props) => {
           ))}
         </div>
         <div>
-        <div>
-          <textarea onChange={handleChange} value={newMessageText} />
-        </div>
-        <div>
-          <button onClick={handleClick}>Add message</button>
-        </div>
+        <DialogMessageReduxForm onSubmit={handleClick} />
       </div>
       </div>
     </div>

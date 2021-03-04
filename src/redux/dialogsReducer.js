@@ -3,10 +3,9 @@ const MESSAGE_TEXT_UPDATE = 'MESSAGE_TEXT_UPDATE';
 
 const initialState = {
   dialogs: [
-    { id: 1, userId: 1 },
-    { id: 2, userId: 5 },
-    { id: 3, userId: 12 },
-    { id: 4, userId: 14 },
+    { id: 1, name: 'Ivan' },
+    { id: 2, name: 'Petr' },
+    { id: 3, name: 'Sergey' },
   ],      
   messages: [
     { dialogId: 1, id: 1, text: 'Hi!', createdBy: 1 },
@@ -22,7 +21,7 @@ const usersReducer = (state = initialState, action) => {
       const text = state.newMessageText;
       const newMessage = {
         dialogId: 1,
-        id: 4,
+        id: 5,
         text,
         createdBy: 1,
       };
@@ -45,13 +44,7 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const addMessageCreator = () => ({
-  type: MESSAGE_ADD,
-});
-
-export const updateMessageTextCreator = (text) => ({
-  type: MESSAGE_TEXT_UPDATE,
-  text,
-});
+export const addMessage = () => ({ type: MESSAGE_ADD });
+export const updateMessageText = (text) => ({ type: MESSAGE_TEXT_UPDATE, text });
 
 export default usersReducer;
