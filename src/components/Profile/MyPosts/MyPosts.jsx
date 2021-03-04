@@ -25,8 +25,9 @@ const MyPosts = (props) => {
     updateProfileText(text);
   }
 
-  const handleClick = () => {
-    addPost();
+  const handleClick = (values) => {
+    alert(values.message);
+    // addPost();
   };
 
   return (

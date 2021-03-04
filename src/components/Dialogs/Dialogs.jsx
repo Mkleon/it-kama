@@ -8,7 +8,7 @@ const DialogMessage = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field type='text' component='textarea' />
+        <Field type='text' component='textarea' name='message' />
       </div>
       <div>
         <button>Add message</button>
@@ -27,8 +27,9 @@ const Dialogs = (props) => {
     updateMessageText(text);
   }
 
-  const handleClick = (e) => {
-    addMessage();
+  const handleClick = (values) => {
+    alert(values.message);
+    //addMessage();
   };
 
   return (
@@ -41,7 +42,7 @@ const Dialogs = (props) => {
         </div>
         <div className={classes.messages}>
           {messages.map((messages) => (
-            <Message key={messages.id} messages={messages} />
+            <Message  messages={messages} />
           ))}
         </div>
         <div>
