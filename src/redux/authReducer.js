@@ -40,8 +40,8 @@ export const authMeThC = () => {
 export const login = (email, password, rememberMe) => {
   return (dispatch) => {
     authApi.login(email, password, rememberMe)
-      .then((data) => {
-        if (data.resultCode === 0) {
+      .then((response) => {
+        if (response.data.resultCode === 0) {
           dispatch(authMeThC());
         }
       });
