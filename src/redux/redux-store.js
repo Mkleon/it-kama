@@ -6,6 +6,7 @@ import dialogsReducer from './dialogsReducer';
 import authReducer from './authReducer';
 import ThunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
+import appReducer from './appReducer';
 
 
 const reducers = combineReducers({
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   friends: friendsReducer,
   auth: authReducer,
   form: formReducer,
+  app: appReducer
 });
 
 const store = createStore(reducers, applyMiddleware(ThunkMiddleware));
