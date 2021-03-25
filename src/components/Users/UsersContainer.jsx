@@ -3,6 +3,13 @@ import Users from './Users';
 import { connect } from 'react-redux';
 import { followThC, unfollowThC, setTotalUsersCount, setPage, getUsersThC } from '../../redux/usersReducer';
 import Preloader from '../common/Preloader/Preloader';
+import { getUsers,
+    getTotalCountPages,
+    getCountPerPage,
+    getCurrentPage,
+    getIsFetching,
+    getIsFollowingProgress
+} from '../../redux/users-selectors';
 
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
@@ -31,7 +38,7 @@ class UsersAPIComponent extends React.Component {
     }
 };
 
-const mapStateToProps = (state) => {
+/* const mapStateToProps = (state) => {
     return {
         users: state.users,
         totalCountPages: state.users.totalCountPages,
@@ -40,7 +47,18 @@ const mapStateToProps = (state) => {
         isFetching: state.users.isFetching,
         isFollowingProgress: state.users.isFollowingProgress,
     }; 
-}
+};*/
+
+const mapStateToProps = (state) => {
+    return {
+        users: getUsers(state),
+        totalCountPages: getTotalCountPages(state),
+        countPerPage:  getCountPerPage(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        isFollowingProgress: getIsFollowingProgress(state),
+    }; 
+};
 
 const mapDispatchToProps = {
     followThC,
