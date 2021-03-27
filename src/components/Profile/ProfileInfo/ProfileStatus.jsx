@@ -1,6 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = (props) => {
+    const [editMode, setEditMode] = useState(false);
+    const [status, setStatus] = useState(props.status);
+
+    const activate = () => setEditMode(true);
+
+    const deactivate = () => {
+        setEditMode(false);
+        props.updateUserStatusThC(status);
+    }
+
+    const onStatusChange = (e) => {
+        setStatus(e.target.value);
+    }
+
+    /*componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status,
+            });
+        }
+    }*/
+
+    return (
+        <div>
+            {!editMode &&
+                <div>
+                    <span onDoubleClick={activate}>{status}</span>
+                </div>
+            }
+            {editMode &&
+                <div>
+                    <input onChange={onStatusChange} autoFocus={true} onBlur={deactivate} value={status} />
+                </div>
+            }
+        </div>
+    );
+}
+
+
+/* class ProfileStatus extends React.Component {
     state = {
         editMode: false,
         status: this.props.status,
@@ -49,6 +89,6 @@ class ProfileStatus extends React.Component {
             </div>
         )
     }
-}
+}*/
 
 export default ProfileStatus;
