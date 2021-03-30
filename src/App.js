@@ -14,6 +14,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/redux-store';
 
 class App extends React.Component {
   componentDidMount(){
@@ -53,7 +56,20 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default compose(
+const AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { initializeApp })
 )(App);
+
+
+const KamaApp = (props) => (
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+export default KamaApp;
