@@ -1,4 +1,4 @@
-const MESSAGE_ADD = 'MESSAGE_ADD';
+const MESSAGE_ADD = 'it-kama/dialogs/MESSAGE_ADD';
 
 const initialState = {
   dialogs: [

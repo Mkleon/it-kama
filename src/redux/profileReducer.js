@@ -1,9 +1,9 @@
 import { profileApi } from "../api/api";
 
-const POST_ADD = 'POST_ADD';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const DELETE_POST = 'DELETE_POST';
+const POST_ADD = 'it-kama/profile/POST_ADD';
+const SET_USER_PROFILE = 'it-kama/profile/SET_USER_PROFILE';
+const SET_STATUS = 'it-kama/profile/SET_STATUS';
+const DELETE_POST = 'it-kama/profile/DELETE_POST';
 
 const initialState = {
   posts:[
@@ -52,33 +52,23 @@ export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status});
 export const deletePostCreator = (postId) => ({ type: DELETE_POST, postId });
 
-export const getUserProfileThC = (userId) => {
-  return (dispatch) => {
-    profileApi.getUserProfile(userId)
-      .then((data) => {
-        dispatch(setUserProfile(data));
-      });
-  };
+export const getUserProfileThC = (userId) => async (dispatch) => {
+    const data = await profileApi.getUserProfile(userId);
+    dispatch(setUserProfile(data));
 };
 
-export const getUserStatusThC = (userId) => {
-  return (dispatch) => {
-    profileApi.getStatus(userId)
-      .then((response) => {
-        dispatch(setStatus(response.data));
-      })
-  };
+export const getUserStatusThC = (userId) => async (dispatch) => {
+  const response = await profileApi.getStatus(userId);
+  dispatch(setStatus(response.data));
 };
 
-export const updateUserStatusThC = (status) => {
-  return (dispatch) => {
-    profileApi.setStatus(status)
-      .then((response) => {
-        if (response.data.resultCode === 0) {
-          dispatch(setStatus(status));
-        }
-      })
-  };
-}
+
+export const updateUserStatusThC = (status) => async (dispatch) => {
+  const response = await profileApi.setStatus(status);
+      
+  if (response.data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
+};
 
 export default profileReducer;

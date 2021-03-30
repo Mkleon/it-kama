@@ -13,12 +13,15 @@ import { getUsers,
 
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
-        this.props.getUsersThC(this.props.currentPage, this.props.countPerPage);
+        const { getUsersThC, currentPage, countPerPage } = this.props;
+        getUsersThC(currentPage, countPerPage);
     }
 
     changePage = (page) => {
-        this.props.setPage(page);
-        this.props.getUsersThC(this.props.currentPage, this.props.countPerPage);
+        const { getUsersThC, currentPage, countPerPage, setPage } = this.props;
+
+        setPage(page);
+        getUsersThC(currentPage, countPerPage);
     }
 
     render() {
@@ -37,17 +40,6 @@ class UsersAPIComponent extends React.Component {
         </>);
     }
 };
-
-/* const mapStateToProps = (state) => {
-    return {
-        users: state.users,
-        totalCountPages: state.users.totalCountPages,
-        countPerPage:  state.users.countPerPage,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        isFollowingProgress: state.users.isFollowingProgress,
-    }; 
-};*/
 
 const mapStateToProps = (state) => {
     return {

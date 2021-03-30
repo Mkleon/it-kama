@@ -1,6 +1,6 @@
 import { authMeThC } from "./authReducer";
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+const INITIALIZED_SUCCESS = 'it-kama/app/INITIALIZED_SUCCESS';
 
 const initialState = {
   initialized: false,

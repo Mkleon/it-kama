@@ -1,12 +1,12 @@
 import { followApi, usersApi } from "../api/api";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
-const SET_PAGE = 'SET_PAGE';
-const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+const FOLLOW = 'it-kama/users/FOLLOW';
+const UNFOLLOW = 'it-kama/users/UNFOLLOW';
+const SET_USERS = 'it-kama/users/SET_USERS';
+const SET_TOTAL_USERS_COUNT = 'it-kama/users/SET_TOTAL_USERS_COUNT';
+const SET_PAGE = 'it-kama/users/SET_PAGE';
+const TOGGLE_PRELOADER = 'it-kama/users/TOGGLE_PRELOADER';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'it-kama/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 const initialState = {
   byId: {},
@@ -82,44 +82,37 @@ export const setPage = (page) => ({ type: SET_PAGE, page });
 export const togglePreloader = (isFetching) => ({ type: TOGGLE_PRELOADER, isFetching });
 export const toggleIsFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
 
-export const followThC = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleIsFollowingProgress(true, userId));
+export const followThC = (userId) => async (dispatch) => {
+  dispatch(toggleIsFollowingProgress(true, userId));
 
-    followApi.setFollow(userId)
-      .then((data) => {
-          if (data.resultCode === 0) {
-            dispatch(follow(userId));
-          }
-          dispatch(toggleIsFollowingProgress(false, userId));
-      });
-  };
-};
+  const data = await followApi.setFollow(userId);
 
-export const unfollowThC = (userId) => {
-  return (dispatch) => {
-    dispatch(toggleIsFollowingProgress(true, userId));
-
-    followApi.setUnfollow(userId)
-      .then((data) => {
-          if (data.resultCode === 0) {
-            dispatch(unfollow(userId));
-          }
-          dispatch(toggleIsFollowingProgress(false, userId));
-      });
-  };
-};
-
-export const getUsersThC = (currentPage, countPerPage) => {
-  return (dispatch) => {
-    dispatch(togglePreloader(true));
-    usersApi.getUsers(currentPage, countPerPage)
-        .then((data) => {
-          dispatch(togglePreloader(false));
-          dispatch(setUsers(data.items));
-          dispatch(setTotalUsersCount(data.totalCount));
-        });
+  if (data.resultCode === 0) {
+    dispatch(follow(userId));
   }
+
+  dispatch(toggleIsFollowingProgress(false, userId));
+};
+
+export const unfollowThC = (userId) => async (dispatch) => {
+  dispatch(toggleIsFollowingProgress(true, userId));
+
+  const data = await followApi.setUnfollow(userId);
+
+  if (data.resultCode === 0) {
+    dispatch(unfollow(userId));
+  }
+
+  dispatch(toggleIsFollowingProgress(false, userId));
+};
+
+export const getUsersThC = (currentPage, countPerPage) => async (dispatch) => {
+  dispatch(togglePreloader(true));
+  const data = await usersApi.getUsers(currentPage, countPerPage);
+
+  dispatch(togglePreloader(false));
+  dispatch(setUsers(data.items));
+  dispatch(setTotalUsersCount(data.totalCount));
 };
 
 export default usersReducer;

@@ -1,20 +1,16 @@
 import React from 'react';
+import Paginator from '../common/Paginator/Paginator';
 import User from './User/User';
-import classes from './Users.module.css';
 
-const Users = (props) => {
-    const pageNumbers = [];
-    const pagesCount = Math.ceil(props.totalCountPages / props.countPerPage);
-
-    for (let i = 1; i <= pagesCount; i += 1) {
-        pageNumbers.push(i);
-    }
-
+const Users = ({ currentPage, totalCountPages, countPerPage, changePage, ...props }) => {
     return (
         <div>
-            <div>
-                {pageNumbers.map((num) => <span className={(props.currentPage === num) ? classes.currentPage : ''} onClick={(e) => { props.changePage(num); }}>{num + '  '}</span>)}
-            </div>
+            <Paginator 
+                currentPage={currentPage}
+                totalCountPages={totalCountPages}
+                countPerPage={countPerPage}
+                changePage={changePage}
+            />
             {props.users.allIds.map((id) => <User
                 user={props.users.byId[id]}
                 followThC={props.followThC}
@@ -24,8 +20,7 @@ const Users = (props) => {
                 toggleIsFollowingProgress={props.toggleIsFollowingProgress}
             />)}
         </div>
-    )
-
+    );
 };
 
 export default Users;
