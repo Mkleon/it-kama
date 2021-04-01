@@ -29,7 +29,7 @@ class UsersAPIComponent extends React.Component {
             {this.props.isFetching ? <Preloader /> : null}
             <Users
                 changePage={this.changePage}
-                totalCountPages={this.props.totalCountPages}
+                totalItemsCount={this.props.totalItemsCount}
                 countPerPage={this.props.countPerPage}
                 currentPage={this.props.currentPage}
                 users={this.props.users}
@@ -44,7 +44,7 @@ class UsersAPIComponent extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: getUsers(state),
-        totalCountPages: getTotalCountPages(state),
+        totalItemsCount: getTotalCountPages(state),
         countPerPage:  getCountPerPage(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),

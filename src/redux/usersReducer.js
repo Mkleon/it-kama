@@ -11,7 +11,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'it-kama/users/TOGGLE_IS_FOLLOWING_PROGRESS
 const initialState = {
   byId: {},
   allIds: [],
-  totalCountPages: 0,
+  totalItemsCount: 0,
   countPerPage: 10,
   currentPage: 1,
   isFetching: true,
@@ -45,7 +45,7 @@ const usersReducer = (state = initialState, action) => {
     case SET_TOTAL_USERS_COUNT: {
       return {
         ...state,
-        totalCountPages: action.count,
+        totalItemsCount: action.count,
       };
     }
     case SET_PAGE: {
